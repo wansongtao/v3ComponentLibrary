@@ -1,0 +1,9 @@
+body,ul,li,ol,dl,dd,h1,h2,h3,h4,h5,h6,input,p{ margin:0;}
+ul,ol { padding:0;}
+img { border:none;}
+a{text-decoration:none;}
+li{list-style:none;}
+/* 解决iOS滚动条卡顿 */
+body,html {
+  -webkit-overflow-scrolling: touch;
+}
