@@ -2,6 +2,8 @@
 import { useRouter } from 'vue-router';
 
 const router = useRouter();
+console.log(router, router.options.routes);
+
 </script>
 
 <template>
@@ -18,13 +20,14 @@ const router = useRouter();
 .home-container {
   display: flex;
   flex-wrap: wrap;
-  margin: 50px;
 
   a {
     display: block;
+    margin-bottom: 10px;
     padding: 10px;
-    font-size: 16px;
+    font-size: 14px;
     color: #000;
+    border: 1px solid #999;
   }
 }
 </style>
