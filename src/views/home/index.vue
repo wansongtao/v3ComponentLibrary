@@ -1,0 +1,30 @@
+<script lang="ts" setup>
+import { useRouter } from 'vue-router';
+
+const router = useRouter();
+</script>
+
+<template>
+  <div class="home-container">
+    <template v-for="item in router.options.routes" :key="item.name">
+      <router-link :to="item.path" v-if="item.path !== '/'">
+        {{ (item.meta && item.meta.title) || item.name }}
+      </router-link>
+    </template>
+  </div>
+</template>
+
+<style lang="scss" scoped>
+.home-container {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 50px;
+
+  a {
+    display: block;
+    padding: 10px;
+    font-size: 16px;
+    color: #000;
+  }
+}
+</style>
