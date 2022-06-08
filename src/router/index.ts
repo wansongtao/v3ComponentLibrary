@@ -24,7 +24,8 @@ const routes: RouteRecordRaw[] = [
     meta: {
       title: '首页'
     }
-  }
+  },
+  ...tempRoute
 ];
 
 const router = createRouter({
