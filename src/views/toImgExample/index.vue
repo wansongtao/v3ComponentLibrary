@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue';
-import domToImage from '../../utils/domToImg';
-import messageNotice from '../../utils/message';
+import domToImage from '@/utils/domToImg';
+import messageNotice from '@/utils/message';
 
 const ele = ref<HTMLElement | null>(null);
 const imgUrl = ref('');
