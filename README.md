@@ -10,3 +10,5 @@ vue3个人组件库，工作、学习积累，包含常用js方法、常用css�
 使用html2canvas库将页面元素转换为图片。该方法接收两个参数，一个dom元素，一个配置对象。详见[domToImage](./src/utils/domToImg.ts)方法.  
 ### 获取任意数据的类型
 原理Object.prototype.toString.call方法。详见[getDataType](./src/utils/index.ts).  
+### 将一些内容添加到剪切板
+原理：创建一个多行文本框，然后选中文本，最后调用document.execCommand方法。该方法只接收一个字符串类型的参数。详见[clipboard](./src/utils/index.ts).
