@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import domToImage from '../../utils/domToImg';
+import messageNotice from '../../utils/message';
 
 const ele = ref<HTMLElement | null>(null);
 const imgUrl = ref('');
@@ -13,6 +14,7 @@ const onGetImg = () => {
     loading.value = false;
   }).catch(() => {
     loading.value = false;
+    messageNotice({ type: 'error', content: '生成图片失败' });
   });
 };
 </script>
