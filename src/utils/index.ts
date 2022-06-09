@@ -150,3 +150,32 @@ export const compose = (...funcs: Function[]) => {
     }
   });
 };
+
+/**
+ * @description 节流函数，触发一次后，下次触发需要间隔一定的时间
+ * @param fn 需要执行的函数
+ * @param delay 间隔时间，默认1s，单位ms
+ * @returns 
+ */
+export const throttle = (fn: Function, delay: number = 1000) => {
+  if (delay < 0) {
+		delay = Math.abs(delay);
+	}
+
+	// 浮点数取整
+	if (~~delay !== delay) {
+		delay = delay | 0;
+	}
+
+  let lastTime = 0;
+  return function<T>(this: any, ...args: T[]) {
+    const nowTime = Date.now();
+
+    if (nowTime - lastTime < delay) {
+      return;
+    }
+    
+    lastTime = nowTime;
+    fn.apply(this, args);
+  }
+}
