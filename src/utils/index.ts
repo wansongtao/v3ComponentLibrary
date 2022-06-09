@@ -133,3 +133,20 @@ export const formatTime = (
     replaceFunc
   );
 };
+
+/**
+ * @description 函数式编程实现，从左往右执行，函数返回值会传给下一个执行的函数
+ * @param funcs 
+ * @returns 
+ */
+export const compose = (...funcs: Function[]) => {
+  if (funcs.length <= 1) {
+    return (arg: any) => arg;
+  }
+
+  return funcs.reduce((a, b) => {
+    return (...args: any[]) => {
+      return b(a(...args))
+    }
+  });
+};
