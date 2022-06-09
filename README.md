@@ -11,4 +11,6 @@ vue3个人组件库，工作、学习积累，包含常用js方法、常用css�
 ### 获取任意数据的类型
 原理Object.prototype.toString.call方法。详见[getDataType](./src/utils/index.ts).  
 ### 将一些内容添加到剪切板
-原理：创建一个多行文本框，然后选中文本，最后调用document.execCommand方法。该方法只接收一个字符串类型的参数。详见[clipboard](./src/utils/index.ts).
+原理：创建一个多行文本框，然后选中文本，最后调用document.execCommand方法。该方法只接收一个字符串类型的参数。详见[clipboard](./src/utils/index.ts).  
+### 时间格式化
+原理：使用正则匹配。该方法接收两个参数：第一个参数Date对象，默认当前时间；第二个参数格式字符串，默认yyyy/MM/dd HH:mm:ss。返回对应的格式字符串。详见[formatTime](./src/utils/index.ts).  
