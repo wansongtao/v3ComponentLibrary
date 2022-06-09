@@ -24,7 +24,7 @@ const onGetImg = () => {
     <p>不过是白驹之过一场梦</p>
     <p>有道是万物皆虚空</p>
   </div>
-  <n-button type="primary" :loading="loading" @click="onGetImg"> 生成图片 </n-button>
+  <a-button type="primary" :loading="loading" @click="onGetImg">生成图片</a-button>
   <div class="box" v-show="imgUrl">
     <h4>生成的图片</h4>
     <img :src="imgUrl" alt="" class="box_img">

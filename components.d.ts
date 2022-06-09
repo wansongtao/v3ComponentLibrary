@@ -5,8 +5,7 @@ import '@vue/runtime-core'
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
-    NButton: typeof import('naive-ui')['NButton']
-    NMessageProvider: typeof import('naive-ui')['NMessageProvider']
+    AButton: typeof import('ant-design-vue/es')['Button']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
   }
