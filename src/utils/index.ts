@@ -364,3 +364,55 @@ export const preloadingImgs = (imgs: string[]) => {
 
   return Promise.all(imgs.map((item) => loadImg(item)));
 };
+
+/**
+ * @description 时区转换
+ * @param time 待转换时间
+ * @param [timeZone=8] 转换为哪个时区，默认东八区(东区传入1至12，西区传入-1~-12)
+ * @param [currTimeZone] 当前时区，默认本地时区(东区传入1至12，西区传入-1~-12)
+ * @returns 返回对应时区时间
+ */
+export const convertTimeZone = (
+  time: Date | string | number,
+  timeZone: number = 8,
+  currTimeZone?: number
+) => {
+  let newTime: Date | null = null;
+
+  if (time instanceof Date) {
+    newTime = time;
+  } else if (typeof time === 'string') {
+    // 在safari中，Date构造函数不能识别‘-’
+    const str = time.replace('-', '/');
+    newTime = new Date(str);
+
+    if (isNaN(newTime as unknown as number)) {
+      throw new Error('time argument error');
+    }
+  } else if (typeof time === 'number') {
+    newTime = new Date(time);
+
+    if (isNaN(newTime as unknown as number)) {
+      throw new Error('time argument error');
+    }
+  } else {
+    throw new TypeError('time argument type error');
+  }
+
+  if (timeZone < -12 || timeZone > 12) {
+    throw new Error('timeZone argument error');
+  }
+
+  let offset = 0; // 传入时间与格林威治时间的时间差，单位毫秒
+  if (currTimeZone === undefined) {
+    // 获取本地时间与格林威治时间的时间差
+    offset = new Date().getTimezoneOffset() * 60 * 1000;
+  } else if (currTimeZone >= -12 && currTimeZone <= 12) {
+    offset -= currTimeZone * 60 * 60 * 1000;
+  } else {
+    throw new Error('currTimeZone argument error');
+  }
+
+  const locale = newTime.getTime() + offset + timeZone * 60 * 60 * 1000;
+  return new Date(locale);
+};

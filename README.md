@@ -30,3 +30,5 @@ vue3个人组件库，工作、学习积累，包含常用js方法、常用css�
 该方法接收两个参数，一个待排序数组，一个比较函数(可选)，返回一个数组，改变原数组。详见[shellSort](./src/utils/index.ts).  
 ### 预加载图片
 使用Promise.all异步加载所有图片，详见[preloadingImgs](./src/utils/index.ts).  
+### 时区转换
+该方法接收三个参数，第一个参数Date或能转为Date对象的值，第二个参数需要转换为哪个时区，第三个参数当前时区，返回转换后的Date对象。详见[convertTimeZone](./src/utils/index.ts).  
