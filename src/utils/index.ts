@@ -213,3 +213,21 @@ export const debounce = (fn: Function, delay: number = 200, immediate: boolean =
     }, delay);
   }
 }
+
+/**
+ * @description 柯里化：将多变量函数拆解为单变量（或部分变量）的多个函数并依次调用
+ * @param fn 
+ * @param args 
+ * @returns 
+ */
+export const curry = (fn: Function, ...args: any[]) => {
+  const length = fn.length;
+
+  if (args.length < length) {
+    return function (...params: any[]) {
+      return curry(fn, ...args, ...params);
+    }
+  }
+
+  return fn(...args);
+}
