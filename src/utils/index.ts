@@ -112,7 +112,21 @@ export const formatTime = (
     }
   };
 
-  type key = 'yy' | 'yyyy' | 'MM' | 'M' | 'd' | 'dd' | 'h' | 'hh' | 'H' | 'HH' | 'm' | 'mm' | 's' | 'ss';
+  type key =
+    | 'yy'
+    | 'yyyy'
+    | 'MM'
+    | 'M'
+    | 'd'
+    | 'dd'
+    | 'h'
+    | 'hh'
+    | 'H'
+    | 'HH'
+    | 'm'
+    | 'mm'
+    | 's'
+    | 'ss';
   const replaceFunc = (val: string): string => {
     let func = formatObj[val as key];
     if (func instanceof Function) {
@@ -136,8 +150,8 @@ export const formatTime = (
 
 /**
  * @description 函数式编程实现，从左往右执行，函数返回值会传给下一个执行的函数
- * @param funcs 
- * @returns 
+ * @param funcs
+ * @returns
  */
 export const compose = (...funcs: Function[]) => {
   if (funcs.length <= 1) {
@@ -146,8 +160,8 @@ export const compose = (...funcs: Function[]) => {
 
   return funcs.reduce((a, b) => {
     return (...args: any[]) => {
-      return b(a(...args))
-    }
+      return b(a(...args));
+    };
   });
 };
 
@@ -155,29 +169,29 @@ export const compose = (...funcs: Function[]) => {
  * @description 节流函数，触发一次后，下次触发需要间隔一定的时间
  * @param fn 需要执行的函数
  * @param delay 间隔时间，默认1s，单位ms
- * @returns 
+ * @returns
  */
 export const throttle = (fn: Function, delay: number = 1000) => {
   if (delay < 0) {
-		delay = Math.abs(delay);
-	}
+    delay = Math.abs(delay);
+  }
 
-	// 浮点数取整
-	if (~~delay !== delay) {
-		delay = delay | 0;
-	}
+  // 浮点数取整
+  if (~~delay !== delay) {
+    delay = delay | 0;
+  }
 
   let lastTime = 0;
-  return function<T>(this: any, ...args: T[]) {
+  return function <T>(this: any, ...args: T[]) {
     const nowTime = Date.now();
 
     if (nowTime - lastTime < delay) {
       return;
     }
-    
+
     lastTime = nowTime;
     fn.apply(this, args);
-  }
+  };
 };
 
 /**
@@ -185,21 +199,25 @@ export const throttle = (fn: Function, delay: number = 1000) => {
  * @param fn 需要防抖的函数
  * @param delay 间隔时间，默认200ms，单位ms
  * @param immediate 第一次是否立即执行，默认false
- * @returns 
+ * @returns
  */
-export const debounce = (fn: Function, delay: number = 200, immediate: boolean = false) => {
+export const debounce = (
+  fn: Function,
+  delay: number = 200,
+  immediate: boolean = false
+) => {
   if (delay < 0) {
-		delay = Math.abs(delay);
-	}
+    delay = Math.abs(delay);
+  }
 
-	// 浮点数取整
-	if (~~delay !== delay) {
-		delay = delay | 0;
-	}
+  // 浮点数取整
+  if (~~delay !== delay) {
+    delay = delay | 0;
+  }
 
   let timer: NodeJS.Timeout | null = null;
   let isFirst = true;
-  return function<T>(this: any, ...args: T[]) {
+  return function <T>(this: any, ...args: T[]) {
     timer && clearTimeout(timer);
 
     if (immediate && isFirst) {
@@ -211,14 +229,14 @@ export const debounce = (fn: Function, delay: number = 200, immediate: boolean =
     timer = setTimeout(() => {
       fn.apply(this, args);
     }, delay);
-  }
-}
+  };
+};
 
 /**
  * @description 柯里化：将多变量函数拆解为单变量（或部分变量）的多个函数并依次调用
- * @param fn 
- * @param args 
- * @returns 
+ * @param fn
+ * @param args
+ * @returns
  */
 export const curry = (fn: Function, ...args: any[]) => {
   const length = fn.length;
@@ -226,8 +244,49 @@ export const curry = (fn: Function, ...args: any[]) => {
   if (args.length < length) {
     return function (...params: any[]) {
       return curry(fn, ...args, ...params);
-    }
+    };
   }
 
   return fn(...args);
-}
+};
+
+/**
+ * @description 将文件切片
+ * @param {File} file 文件对象
+ * @param {number} [start = 0] 从文件的哪里开始，默认0
+ * @param {number} [piece = 1024 * 512] 每一块大小，默认512k
+ * @returns {Blob[]} 返回一个文件切片数组
+ */
+export const fileSlice = (
+  file: File,
+  start: number = 0,
+  piece: number = 1024 * 512
+): Blob[] => {
+  const total = file.size;
+  let end = start + piece;
+
+  // 结束位置不能超出文件大小
+  if (end > total) {
+    end = total;
+  }
+
+  const chunks = [];
+  while (end <= total) {
+    const blob = file.slice(start, end);
+    chunks.push(blob);
+
+    if (end === total) {
+      break;
+    }
+
+    start = end;
+    end = start + piece;
+
+    // 结束位置不能超出文件大小
+    if (end > total) {
+      end = total;
+    }
+  }
+
+  return chunks;
+};
