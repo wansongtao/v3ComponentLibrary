@@ -290,3 +290,47 @@ export const fileSlice = (
 
   return chunks;
 };
+
+/**
+ * @description 希尔排序，改变原数组
+ * @param arr 待排序的数组
+ * @param [fn] 比较函数，如：降序 (a, b) => a - b > 0
+ * @returns
+ */
+export const shellSort = <T = number>(
+  arr: T[],
+  fn?: (a: T, b: T) => boolean
+): T[] => {
+  if (arr.length < 2) {
+    return arr;
+  }
+
+  // 设置动态间隔
+  let h = 1;
+  while (h < arr.length / 3) {
+    h = h * 3 + 1;
+  }
+
+  while (h > 0) {
+    for (let i = 0; i < arr.length; i++) {
+      let prevIdx = i - h;
+      const currVal = arr[i];
+
+      while (
+        prevIdx >= 0 &&
+        (fn instanceof Function
+          ? fn(currVal, arr[prevIdx])
+          : arr[prevIdx] > currVal)
+      ) {
+        arr[prevIdx + h] = arr[prevIdx];
+        prevIdx -= h;
+      }
+
+      arr[prevIdx + h] = currVal;
+    }
+
+    h = (h - 1) / 3;
+  }
+
+  return arr;
+};
