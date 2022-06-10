@@ -34,3 +34,5 @@ vue3个人组件库，工作、学习积累，包含常用js方法、常用css�
 该方法接收三个参数，第一个参数Date或能转为Date对象的值，第二个参数需要转换为哪个时区，第三个参数当前时区，返回转换后的Date对象。详见[convertTimeZone](./src/utils/index.ts).  
 ### 闰平年判断
 该方法接收一个参数年份，闰年返回true，反之false。详见[isLeapYear](./src/utils/index.ts).  
+### 深拷贝实现
+支持Map、Set、RegExp、Date、Function、Object类型、简单数据类型(symbol除外)和循环引用，不拷贝原型。详见[deepClone](./src/utils/index.ts).  
