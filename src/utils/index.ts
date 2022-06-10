@@ -522,3 +522,15 @@ export const deepClone = <T = any>(obj: T): T => {
 
   return clone(obj);
 };
+
+/**
+ * @description 创建a标签下载文件
+ * @param url 下载地址
+ * @param [filename] 自定义下载文件名
+ */
+export const createAEleDownloadFile = (url: string, filename?: string) => {
+  const aElement = document.createElement('a');
+  aElement.download = filename || Date.now().toString();
+  aElement.href = url;
+  aElement.click();
+};
