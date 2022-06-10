@@ -334,3 +334,33 @@ export const shellSort = <T = number>(
 
   return arr;
 };
+
+/**
+ * @description 预加载图片
+ * @param imgs 图片列表
+ * @returns 全部加载成功resolve()，有一张图片加载失败reject(url)
+ */
+export const preloadingImgs = (imgs: string[]) => {
+  /**
+   * @description 加载图片
+   * @param url
+   * @returns 成功resolve()，失败reject(url)
+   */
+  const loadImg = (url: string) => {
+    return new Promise<void>((resolve, reject) => {
+      const imgEle = new Image();
+
+      imgEle.onload = () => {
+        resolve();
+      };
+
+      imgEle.onerror = () => {
+        reject(url);
+      };
+
+      imgEle.src = url;
+    });
+  };
+
+  return Promise.all(imgs.map((item) => loadImg(item)));
+};

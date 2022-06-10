@@ -28,3 +28,5 @@ vue3个人组件库，工作、学习积累，包含常用js方法、常用css�
 该方法只能解决使用微信打开网页后不能自动播放音视频的问题。chrome等浏览器不能自动播放，必须有交互后才能播放。详见[autoPlay](./src/utils/wxAutoPlay.ts).  
 ### 希尔排序方法
 该方法接收两个参数，一个待排序数组，一个比较函数(可选)，返回一个数组，改变原数组。详见[shellSort](./src/utils/index.ts).  
+### 预加载图片
+使用Promise.all异步加载所有图片，详见[preloadingImgs](./src/utils/index.ts).  
