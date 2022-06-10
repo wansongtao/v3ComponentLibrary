@@ -270,7 +270,7 @@ export const fileSlice = (
     end = total;
   }
 
-  const chunks = [];
+  const chunks: Blob[] = [];
   while (end <= total) {
     const blob = file.slice(start, end);
     chunks.push(blob);
