@@ -416,3 +416,22 @@ export const convertTimeZone = (
   const locale = newTime.getTime() + offset + timeZone * 60 * 60 * 1000;
   return new Date(locale);
 };
+
+/**
+ * @description 是否为闰年
+ * @param year 年份
+ * @returns 是true，否false
+ */
+export const isLeapYear = (year: number) => {
+  // 能被400整除为闰年
+  if (year % 400 === 0) {
+    return true;
+  }
+
+  // 能被4整除但不能被100整除为闰年
+  if (year % 4 === 0 && year % 100 !== 0) {
+    return true;
+  }
+
+  return false;
+};
