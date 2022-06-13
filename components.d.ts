@@ -6,8 +6,6 @@ import '@vue/runtime-core'
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
     AButton: typeof import('ant-design-vue/es')['Button']
-    MySwipe: typeof import('./src/components/MySwipe/index.vue')['default']
-    MySwipeItem: typeof import('./src/components/MySwipeItem/index.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
   }
