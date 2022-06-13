@@ -22,6 +22,7 @@ const router = useRouter();
   a {
     display: block;
     margin-bottom: 10px;
+    margin-right: 20px;
     padding: 10px;
     font-size: 14px;
     color: #000;
