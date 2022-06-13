@@ -1,7 +1,4 @@
 <script lang="ts" setup>
-import MySwipe from '@/components/MySwipe/index.vue';
-import MySwipeItem from '@/components/MySwipeItem/index.vue';
-
 const handlerChangeState = (idx: number) => {
   console.log(idx);
 }

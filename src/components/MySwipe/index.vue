@@ -7,9 +7,8 @@ import {
   toRefs,
   provide
 } from 'vue';
-import MySwipeItem from '../MySwipeItem/index.vue';
 
-interface MyProps {
+interface Props {
   loop?: boolean
   autoplay?: number
   duration?: number
@@ -19,7 +18,7 @@ interface MyProps {
   width?: number
 }
 
-const props = withDefaults(defineProps<MyProps>(), {
+const props = withDefaults(defineProps<Props>(), {
   loop: true,
   autoplay: 1500,
   duration: 500,
