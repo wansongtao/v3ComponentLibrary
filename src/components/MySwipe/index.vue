@@ -9,45 +9,27 @@ import {
 } from 'vue';
 import MySwipeItem from '../MySwipeItem/index.vue';
 
-const props = defineProps({
-  loop: {
-    // 是否开启循环轮播，默认开启
-    type: Boolean,
-    default: true
-  },
-  autoplay: {
-    // 循环轮播间隔时间，单位ms
-    type: Number,
-    default: 1500
-  },
-  duration: {
-    // 轮播动画时间，单位ms
-    type: Number,
-    default: 500
-  },
-  showIndicators: {
-    // 是否显示指示器，默认显示
-    type: Boolean,
-    default: true
-  },
-  indicatorClass: {
-    // 支持父组件传入指示器的类
-    type: String,
-    default: 'swipe_indicator_item'
-  },
-  activeIndicatorClass: {
-    // 支持父组件传入活动状态的指示器类
-    type: String,
-    default: 'swipe_indicator_item--active'
-  },
-  width: {
-    // 自定义宽度
-    type: Number,
-    default: 0
-  }
+interface MyProps {
+  loop?: boolean
+  autoplay?: number
+  duration?: number
+  showIndicators?: boolean
+  indicatorClass?: string
+  activeIndicatorClass?: string
+  width?: number
+}
+
+const props = withDefaults(defineProps<MyProps>(), {
+  loop: true,
+  autoplay: 1500,
+  duration: 500,
+  showIndicators: true,
+  indicatorClass: 'swipe_indicator_item',
+  activeIndicatorClass: 'swipe_indicator_item--active',
+  width: 0
 });
 // 每一页轮播结束后触发change事件，抛出当前页的索引
-const emit = defineEmits(['change']);
+const emit = defineEmits<{(e: 'change', idx: number): void}>();
 // 将轮播的每一项的宽度传给子组件
 provide('width', props.width);
 
