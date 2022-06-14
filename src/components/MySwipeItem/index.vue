@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { inject, ref } from 'vue';
 
-const width: number | undefined = inject('width');
+const width = inject<number>('width');
 const style = ref('');
 
 if (width) {

@@ -10,13 +10,13 @@ import {
 import MySwipeItem from '../MySwipeItem/index.vue';
 
 interface Props {
-  loop?: boolean
-  autoplay?: number
-  duration?: number
-  showIndicators?: boolean
-  indicatorClass?: string
-  activeIndicatorClass?: string
-  width?: number
+  loop?: boolean;
+  autoplay?: number;
+  duration?: number;
+  showIndicators?: boolean;
+  indicatorClass?: string;
+  activeIndicatorClass?: string;
+  width?: number;
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -29,7 +29,7 @@ const props = withDefaults(defineProps<Props>(), {
   width: 0
 });
 // 每一页轮播结束后触发change事件，抛出当前页的索引
-const emit = defineEmits<{(e: 'change', idx: number): void}>();
+const emit = defineEmits<{ (e: 'change', idx: number): void }>();
 // 将轮播的每一项的宽度传给子组件
 provide('width', props.width);
 
@@ -81,17 +81,15 @@ const setAutoPlay = () => {
 };
 
 onMounted(() => {
+  // 获取轮播的项目数
+  swipe.total = (swipeEle.value as HTMLDivElement).childElementCount;
+
   if (props.width) {
     (swipeEle.value as HTMLDivElement).setAttribute(
       'style',
-      `width: ${
-        (swipeEle.value as HTMLDivElement).childElementCount * props.width
-      }px;`
+      `width: ${swipe.total * props.width}px;`
     );
   }
-
-  // 获取轮播的项目数
-  swipe.total = (swipeEle.value as HTMLDivElement).childElementCount;
 
   if (props.loop) {
     setAutoPlay();
@@ -114,6 +112,10 @@ const handlerStartLoop = () => {
 };
 
 const handlerGoPage = (idx: number) => {
+  if (idx < -1 || idx > swipe.total) {
+    return;
+  }
+
   swipe.activeIdx = idx;
 
   swipeTo(swipeEle.value as HTMLDivElement, props.duration, idx, props.width);
@@ -143,13 +145,9 @@ function swipeTo(
   ele: HTMLDivElement,
   duration: number,
   idx: number,
-  width: number
+  width?: number
 ) {
   const childTotal = ele.childElementCount;
-  if (idx < -1 || idx > childTotal) {
-    return;
-  }
-
   const childWidth = width || (ele.children[0] as HTMLElement).offsetWidth;
   const moveDistance = childWidth * idx;
   let style = '';
@@ -211,7 +209,7 @@ function swipeTo(
 const { activeIdx, total } = toRefs(swipe);
 defineExpose({
   handlerGoPage
-})
+});
 </script>
 
 <template>
