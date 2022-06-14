@@ -150,10 +150,7 @@ function swipeTo(
   const childTotal = ele.childElementCount;
   const childWidth = width || (ele.children[0] as HTMLElement).offsetWidth;
   const moveDistance = childWidth * idx;
-  let style = '';
-  if (width) {
-    style = `width: ${width * childTotal}px;`;
-  }
+  const style = width ? `width: ${width * childTotal}px;` : '';
 
   // 使用过渡动画切换到指定页码
   ele.setAttribute(
