@@ -2,7 +2,7 @@ import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
 import Home from '../views/home/index.vue';
 
 // 同步引入所有模块化路由文件
-const modules = import.meta.globEager('../views/**/*.ts');
+const modules = import.meta.globEager('../views/**/router/index.ts');
 const tempRoute: RouteRecordRaw[] = [];
 Object.keys(modules).forEach((key) => {
   tempRoute.push(...modules[key].default);
