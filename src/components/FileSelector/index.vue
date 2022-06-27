@@ -1,6 +1,4 @@
 <script lang="ts" setup>
-import { DragNodeEvent } from 'ant-design-vue/lib/vc-tree/interface';
-import { ChangeEvent } from 'ant-design-vue/lib/_util/EventInterface';
 import { ref } from 'vue';
 const props = defineProps({
   /**
@@ -59,7 +57,7 @@ const saveFileInfo = (checkedFiles: File[]) => {
     if (files.value.length >= 1) {
       return;
     }
-    
+
     disabled.value = true;
     files.value = checkedFiles;
     emit('change', files.value);
