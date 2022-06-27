@@ -29,7 +29,7 @@ const props = defineProps({
     default: false
   }
 });
-const emit = defineEmits(['change']);
+const emit = defineEmits<{(event: 'change', files: File[]): void}>();
 
 const disabled = ref(false);
 const fileEle = ref<HTMLInputElement | null>(null);
