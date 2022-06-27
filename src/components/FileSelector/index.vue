@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import { DragNodeEvent } from 'ant-design-vue/lib/vc-tree/interface';
+import { ChangeEvent } from 'ant-design-vue/lib/_util/EventInterface';
 import { ref } from 'vue';
 const props = defineProps({
   /**
@@ -58,6 +59,7 @@ const saveFileInfo = (checkedFiles: File[]) => {
     if (files.value.length >= 1) {
       return;
     }
+    
     disabled.value = true;
     files.value = checkedFiles;
     emit('change', files.value);
@@ -103,13 +105,17 @@ const clearFiles = () => {
   files.value = [];
 };
 
-const onSelectFile = (e: any) => {
-  const checkedFiles = e.target.files;
-  saveFileInfo(checkedFiles);
+const onSelectFile = (e: Event) => {
+  const checkedFiles = (e.target as HTMLInputElement).files;
+  if (!checkedFiles) {
+    return;
+  }
+
+  saveFileInfo(Array.from(checkedFiles));
 };
-const onDragFile = (e: any) => {
-  const checkedFiles = e.dataTransfer.files;
-  saveFileInfo(checkedFiles);
+const onDragFile = (e: DragEvent) => {
+  const checkedFiles = e.dataTransfer!.files;
+  saveFileInfo(Array.from(checkedFiles));
 };
 
 defineExpose({
