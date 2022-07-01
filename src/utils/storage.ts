@@ -6,13 +6,10 @@
  */
 
 /** */
-type ISession = 'sessionStorage';
-type ILocal = 'localStorage';
-
 interface IConfig<T> {
   key: string;
   value: T;
-  type?: ISession | ILocal;
+  isLocalStorage?: boolean;
   maxAge?: number;
   prefix?: string;
 }
@@ -21,39 +18,40 @@ interface IConfig<T> {
  * 默认前缀
  */
 const PREFIX = 'v3-';
-const MODE_SESSION: ISession = 'sessionStorage';
-// const MODE_LOCAL: ILocal = 'localStorage';
 
 /**
  * 本地/会话存储，支持设置过期时间
  * @param config
- * @param config.type 默认本地存储
  * @param config.key 键
  * @param config.value 值
+ * @param [config.isLocalStorage] 是否本地存储，默认本地存储
  * @param [config.maxAge] 多少秒后过期
  * @param [config.prefix] 前缀，不传入将使用设置的默认前缀
  * @returns
  */
-export const setStorage = <T = any>(config: IConfig<T>) => {
-  const storage = { data: config.value, expire: 0 };
+export const setStorage = <T = any>({
+  key,
+  value,
+  isLocalStorage = true,
+  maxAge,
+  prefix = PREFIX
+}: IConfig<T>) => {
+  const storage = { data: value, expire: 0 };
 
-  if (config.maxAge) {
-    storage.expire = Date.now() + config.maxAge * 1000;
+  if (maxAge) {
+    storage.expire = Date.now() + maxAge * 1000;
   }
 
   try {
     const value = JSON.stringify(storage);
-    const name =
-      config.prefix === undefined
-        ? `${PREFIX}${config.key}`
-        : `${config.prefix}${config.key}`;
+    const name = `${prefix}${key}`;
 
-    if (config.type === MODE_SESSION) {
-      sessionStorage.setItem(name, value);
+    if (isLocalStorage) {
+      localStorage.setItem(name, value);
       return;
     }
 
-    localStorage.setItem(name, value);
+    sessionStorage.setItem(name, value);
   } catch (ex) {
     console.error(ex);
   }
@@ -62,20 +60,19 @@ export const setStorage = <T = any>(config: IConfig<T>) => {
 /**
  * 取出本地/会话存储中未过期的数据，已过期、未找到返回null
  * @param key
- * @param type 默认本地存储
+ * @param isLocalStorage 是否本地存储，默认是
  * @param prefix 前缀，不传则采用设置的默认前缀
  * @returns
  */
 export const getStorage = <T = any>(
   key: string,
-  type?: ISession | ILocal,
+  isLocalStorage: boolean = true,
   prefix: string = PREFIX
 ): T | null => {
   const name = `${prefix}${key}`;
-  const storage =
-    type === MODE_SESSION
-      ? sessionStorage.getItem(name)
-      : localStorage.getItem(name);
+  const storage = isLocalStorage
+    ? localStorage.getItem(name)
+    : sessionStorage.getItem(name);
 
   if (storage === null) {
     console.error(`not found ${name}`);
