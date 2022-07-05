@@ -9,6 +9,7 @@ export default defineConfig({
   plugins: [
     vue(),
     Components({
+      // dirs: [], // 指定自己的组件位置，设置为空数组可以不自动引入自己的组件
       resolvers: [AntDesignVueResolver()]
     })
   ],
