@@ -7,7 +7,6 @@ import {
   toRefs,
   provide
 } from 'vue';
-import MySwipeItem from '../MySwipeItem/index.vue';
 
 interface Props {
   loop?: boolean;

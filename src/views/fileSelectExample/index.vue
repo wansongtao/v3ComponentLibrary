@@ -1,6 +1,4 @@
 <script lang="ts" setup>
-import FileSelector from '@/components/FileSelector/index.vue';
-
 const onGetFiles = (files: File[]) => {
   console.log(files);
 };
