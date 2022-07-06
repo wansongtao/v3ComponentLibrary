@@ -515,12 +515,11 @@ export const deepClone = <T = any>(obj: T): T => {
 
       // 判断是否为循环引用
       if (copyObj[key] === data[key]) {
-        // 不拷贝循环引用的属性
-        // newObj[key] = data[key];
+        newObj[key] = data[key];
         continue;
       }
       copyObj[key] = data[key];
-      
+
       newObj[key] = clone(data[key]);
     }
 
