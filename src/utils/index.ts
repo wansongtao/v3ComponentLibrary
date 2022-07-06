@@ -459,9 +459,9 @@ export const deepClone = <T = any>(obj: T): T => {
 
     for (const key in data) {
       // 跳过原型上的属性
-      if (!data.hasOwnProperty(key)) {
-        continue;
-      }
+      // if (!data.hasOwnProperty(key)) {
+      //   continue;
+      // }
 
       // 简单数据类型直接返回值
       if (!(data[key] instanceof Object)) {
@@ -480,7 +480,9 @@ export const deepClone = <T = any>(obj: T): T => {
       }
 
       if (data[key] instanceof Function) {
-        newObj[key] = new Function(`return ${data[key].toString()}`)();
+        // 处理es6简写方法名的问题，例如：{hi() {return 1;}}
+        const funcStr = data[key].toString().replace(/^function/, '');
+        newObj[key] = new Function(`return function ${funcStr}`)();
         continue;
       }
 
@@ -513,11 +515,12 @@ export const deepClone = <T = any>(obj: T): T => {
 
       // 判断是否为循环引用
       if (copyObj[key] === data[key]) {
-        newObj[key] = data[key];
+        // 不拷贝循环引用的属性
+        // newObj[key] = data[key];
         continue;
       }
-
       copyObj[key] = data[key];
+      
       newObj[key] = clone(data[key]);
     }
 
