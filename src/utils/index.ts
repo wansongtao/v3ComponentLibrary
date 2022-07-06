@@ -301,7 +301,7 @@ export const fileSlice = (
  * @param [fn] 比较函数，如：降序 (a, b) => a - b > 0
  * @returns
  */
-export const shellSort = <T = number>(
+export const shellSort = <T = any>(
   arr: T[],
   fn?: (a: T, b: T) => boolean
 ): T[] => {
@@ -324,7 +324,7 @@ export const shellSort = <T = number>(
         prevIdx >= 0 &&
         (fn instanceof Function
           ? fn(currVal, arr[prevIdx])
-          : arr[prevIdx] > currVal)
+          : String(arr[prevIdx]) > String(currVal))
       ) {
         arr[prevIdx + h] = arr[prevIdx];
         prevIdx -= h;
