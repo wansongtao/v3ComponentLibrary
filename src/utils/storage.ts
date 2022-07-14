@@ -60,7 +60,7 @@ export const setStorage = <T = any>({
 /**
  * 取出本地/会话存储中未过期的数据，已过期、未找到返回null
  * @param key
- * @param isLocalStorage 是否本地存储，默认是
+ * @param isLocalStorage 
  * @param prefix 前缀，不传则采用设置的默认前缀
  * @returns
  */
@@ -86,4 +86,25 @@ export const getStorage = <T = any>(
   }
 
   return value.data;
+};
+
+/**
+ * 删除本地/会话存储中的对应数据
+ * @param key
+ * @param isLocalStorage 
+ * @param prefix 前缀，不传则采用设置的默认前缀
+ * @returns
+ */
+ export const removeStorage = (
+  key: string,
+  isLocalStorage: boolean = true,
+  prefix: string = PREFIX
+) => {
+  const name = `${prefix}${key}`;
+
+  if (isLocalStorage) {
+    localStorage.removeItem(name);
+  } else {
+    sessionStorage.removeItem(name);
+  }
 };
