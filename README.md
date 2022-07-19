@@ -40,8 +40,13 @@ vue3个人组件库，工作、学习积累，包含常用js方法、常用css�
 该方法接收两个参数，一个下载链接，一个文件名（可选）。详见[createAEleDownloadFile](./src/utils/index.ts).  
 ### 本地、会话存储封装
 支持设置过期时间。详见[storage](./src/utils/storage.ts).  
+
 ## 自定义组件
-
 ### 文件选择器
-
 支持单、多选文件，支持拖动选择，支持限制文件类型和数量，使用input元素实现。详见[fileSelector](./src/components/FileSelector/index.vue).  
+### 轮播器
+支持自定义指示器。详见[MySwipe](./src/components/MySwipe/index.vue).  
+### 分页
+ant-design分页组件封装。详见[SelfPagination](./src/components/SelfPagination/index.vue).  
+### 输入框
+ant-design input输入框组件封装，添加了防抖功能。详见[SelfInput](./src/components/SelfInput/index.vue).  
