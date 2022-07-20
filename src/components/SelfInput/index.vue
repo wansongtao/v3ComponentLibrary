@@ -31,6 +31,10 @@ const inputValue = ref(props.value);
 watch(
   inputValue,
   debounce((newVal: string) => {
+    if (newVal === props.value) {
+      return;
+    }
+    
     emits('changevalue', newVal);
   }, props.delay)
 );
