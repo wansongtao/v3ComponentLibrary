@@ -20,16 +20,27 @@ const props = defineProps({
   delay: {
     type: Number,
     default: 200
+  },
+  value: {
+    type: String,
+    default: ''
   }
 });
 
-const value = ref('');
+const inputValue = ref(props.value);
 watch(
-  value,
+  inputValue,
   debounce((newVal: string) => {
     emits('changevalue', newVal);
   }, props.delay)
 );
+watch(() => props.value, (val) => {
+  if (inputValue.value === val) {
+    return;
+  }
+
+  inputValue.value = val;
+});
 </script>
 
 <template>
@@ -37,7 +48,7 @@ watch(
     <div class="self_input_label" v-if="label">{{ label }}</div>
     <div class="self_input_main">
       <a-input
-        v-model:value="value"
+        v-model:value="inputValue"
         :placeholder="placeholder"
         :maxlength="maxLength"
         allow-clear
