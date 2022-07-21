@@ -128,6 +128,7 @@ defineExpose({
     ref="fileEle"
     type="file"
     name="files"
+    title="upload"
     :multiple="multiple"
     :accept="accept"
     class="file_input"
@@ -139,7 +140,9 @@ defineExpose({
     @click="onOpenFileDialog"
     v-if="!drag"
   >
-    <slot :disabled="disabled"> 选择文件 </slot>
+    <slot :disabled="disabled">
+      <div class="default_btn">选择文件</div>
+    </slot>
   </div>
   <div
     class="file_btn"
@@ -150,7 +153,9 @@ defineExpose({
     @drop.prevent="onDragFile"
     v-if="drag"
   >
-    <slot :disabled="disabled"> 选择文件 </slot>
+    <slot :disabled="disabled">
+      <div class="default_btn">选择文件</div>
+    </slot>
   </div>
 </template>
 
@@ -170,5 +175,13 @@ defineExpose({
 }
 .file_btn--stop:hover {
   cursor: not-allowed;
+}
+
+.default_btn {
+  width: 80px;
+  height: 32px;
+  text-align: center;
+  line-height: 32px;
+  border: 1px solid #999;
 }
 </style>
