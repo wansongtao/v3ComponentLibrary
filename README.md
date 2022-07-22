@@ -50,3 +50,7 @@ vue3个人组件库，工作、学习积累，包含常用js方法、常用css�
 ant-design分页组件封装。详见[SelfPagination](./src/components/SelfPagination/index.vue).  
 ### 输入框
 ant-design input输入框组件封装，添加了防抖功能。详见[SelfInput](./src/components/SelfInput/index.vue).  
+### 日期选择框
+ant-design的日期选择框封装。详见[AntDatePicker](./src/components/AntDatePicker/index.vue).
+### 选择器
+ant-design的选择器组件封装。详见[AntSelect](./src/components/AntSelect/index.vue).
