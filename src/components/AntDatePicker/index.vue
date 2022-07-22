@@ -41,6 +41,9 @@ watch(
   }
 );
 
+/**
+ * 禁止选择今天以后的时间
+ */
 const disabledDate = (current: Dayjs) => {
   return current > dayjs();
 };
