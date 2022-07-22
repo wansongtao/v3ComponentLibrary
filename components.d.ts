@@ -6,12 +6,16 @@ import '@vue/runtime-core'
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
     AButton: typeof import('ant-design-vue/es')['Button']
+    AntDatePicker: typeof import('./src/components/AntDatePicker/index.vue')['default']
+    AntSelect: typeof import('./src/components/AntSelect/index.vue')['default']
     APagination: typeof import('ant-design-vue/es')['Pagination']
+    ASelect: typeof import('ant-design-vue/es')['Select']
     FileSelector: typeof import('./src/components/FileSelector/index.vue')['default']
     MySwipe: typeof import('./src/components/MySwipe/index.vue')['default']
     MySwipeItem: typeof import('./src/components/MySwipeItem/index.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    SelfInput: typeof import('./src/components/SelfInput/index.vue')['default']
     SelfPagination: typeof import('./src/components/SelfPagination/index.vue')['default']
   }
 }
