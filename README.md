@@ -54,3 +54,5 @@ ant-design input输入框组件封装，添加了防抖功能。详见[SelfInput
 ant-design的日期选择框封装。详见[AntDatePicker](./src/components/AntDatePicker/index.vue).
 ### 选择器
 ant-design的选择器组件封装。详见[AntSelect](./src/components/AntSelect/index.vue).
+### 对话框
+ant-design的modal组件封装。详见[AntModal](./src/components/AntModal/index.vue).
