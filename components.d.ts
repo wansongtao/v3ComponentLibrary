@@ -7,7 +7,9 @@ declare module '@vue/runtime-core' {
   export interface GlobalComponents {
     AButton: typeof import('ant-design-vue/es')['Button']
     ADatePicker: typeof import('ant-design-vue/es')['DatePicker']
+    AModal: typeof import('ant-design-vue/es')['Modal']
     AntDatePicker: typeof import('./src/components/AntDatePicker/index.vue')['default']
+    AntModal: typeof import('./src/components/AntModal/index.vue')['default']
     AntSelect: typeof import('./src/components/AntSelect/index.vue')['default']
     APagination: typeof import('ant-design-vue/es')['Pagination']
     ASelect: typeof import('ant-design-vue/es')['Select']
