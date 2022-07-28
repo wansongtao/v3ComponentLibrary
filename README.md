@@ -5,6 +5,14 @@ vue3个人组件库，工作、学习积累，包含常用js方法、常用css�
 ## 常用css
 有移动端的1px方案、超出一行换行、超出多行换行、禁止选中文本、自定义光标颜色、自定义滚动条等，详见[styles/common](./src/styles/common.css).
 
+## 自定义hooks
+### ant-design的table组件的复选框功能
+返回选中项和配置对象。详见[useTableSelection](./src/hooks/useTableSelection.ts).  
+
+### 页面定时执行方法
+在onActivated生命周期定时执行方法，onDeactivated生命周期/页面隐藏时移除定时器。  
+该方法接收三个参数，第一个参数需要定时执行的方法，第二个参数是否在进入onActivated时立即执行方法，第三个参数间隔时长。返回设置定时执行方法的函数和移除定时器的函数。详见[useUpdateData](./src/hooks/useUpdateData.ts).  
+
 ## js常用方法
 ### 元素转图片
 使用html2canvas库将页面元素转换为图片。该方法接收两个参数，一个dom元素，一个配置对象。详见[domToImage](./src/utils/domToImg.ts)方法.  
