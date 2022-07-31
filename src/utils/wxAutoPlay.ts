@@ -1,3 +1,4 @@
+// @ts-nocheck
 /**
  * @description 用微信打开网页时自动播放音视频
  * @param {HTMLAudioElement | HTMLVideoElement} av 音视频对象
