@@ -43,7 +43,7 @@ watch([() => props.currPage, () => props.size], ([page, size]) => {
       v-model:pageSize="pageSize"
       show-quick-jumper
       :total="total"
-      :show-total="(total) => `共${total}条`"
+      :show-total="(total: number) => `共${total}条`"
       :pageSizeOptions="['10', '20', '30', '40']"
       :showSizeChanger="true"
       @change="onChange"
