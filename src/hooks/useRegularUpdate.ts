@@ -1,30 +1,30 @@
 import { onActivated, onDeactivated, ref } from 'vue';
 
 /**
- * 在onActivated生命周期定时执行方法，onDeactivated生命周期移除定时器(进入页面也会刷新数据)
- * 页面隐藏时，不执行定时方法
+ * 定期执行方法：在onActivated生命周期定时执行方法，onDeactivated生命周期移除定时器(进入页面也会刷新数据)。
+ * 页面隐藏时，移除定时器。页面显示后，再添加定时器。
  * @param fn 需要定时执行的函数
  * @param isInitial 在onActivated生命周期是否先执行一遍方法，默认是
- * @param time 间隔时间，单位秒，默认10秒刷新
+ * @param duration 间隔时间，单位秒，默认10秒刷新
  */
-const useUpdateData = (
+const useRegularUpdate = (
   fn: Function,
   isInitial: boolean = true,
-  time: number = 10
+  duration: number = 10
 ) => {
-  const timer = ref<NodeJS.Timer>();
+  const timer = ref<NodeJS.Timer | null>(null);
 
   /**
-   * 设置定时器，定时执行方法
+   * 添加定时器，定时执行方法
    */
-  const setTimer = () => {
+  const addTimer = () => {
     if (timer.value) {
       return;
     }
 
     timer.value = setInterval(() => {
       fn();
-    }, time * 1000);
+    }, duration * 1000);
   };
 
   /**
@@ -32,21 +32,23 @@ const useUpdateData = (
    */
   const removeTimer = () => {
     timer.value && clearInterval(timer.value);
-
-    timer.value = undefined;
+    timer.value = null;
   };
 
+  /**
+   * 在页面状态改变时，添加/移除定时器
+   */
   const pageStateChange = () => {
-    const state = document.visibilityState;
     const methods = {
-      visible() {
-        setTimer();
+      visible: () => {
+        addTimer();
       },
-      hidden() {
+      hidden: () => {
         removeTimer();
       }
     };
 
+    const state = document.visibilityState;
     methods[state]();
   };
 
@@ -55,7 +57,7 @@ const useUpdateData = (
       fn();
     }
 
-    setTimer();
+    addTimer();
     document.addEventListener('visibilitychange', pageStateChange);
   });
 
@@ -66,9 +68,9 @@ const useUpdateData = (
   });
 
   return {
-    setTimer,
+    addTimer,
     removeTimer
   };
 };
 
-export default useUpdateData;
+export default useRegularUpdate;

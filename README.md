@@ -11,7 +11,7 @@ vue3个人组件库，工作、学习积累，包含常用js方法、常用css�
 
 ### 页面定时执行方法
 在onActivated生命周期定时执行方法，onDeactivated生命周期/页面隐藏时移除定时器。  
-该方法接收三个参数，第一个参数需要定时执行的方法，第二个参数是否在进入onActivated时立即执行方法，第三个参数间隔时长。返回设置定时执行方法的函数和移除定时器的函数。详见[useUpdateData](./src/hooks/useUpdateData.ts).  
+该方法接收三个参数，第一个参数需要定时执行的方法，第二个参数是否在进入onActivated时立即执行方法，第三个参数间隔时长。返回设置定时执行方法的函数和移除定时器的函数。详见[useRegularUpdate](./src/hooks/useRegularUpdate.ts).  
 
 ## js常用方法
 ### 元素转图片
